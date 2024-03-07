@@ -1,0 +1,12 @@
+name: aonix-localnet
+
+volumes:
+  arlocal-db:
+
+services:
+  arlocal:
+    build: ./arlocal
+    ports:
+      - 4000:80
+    volumes:
+      - arlocal-db:/mnt
