@@ -10,3 +10,9 @@ services:
       - 4000:80
     volumes:
       - arlocal-db:/mnt
+  ardrive-web:
+    depends_on:
+      - arlocal
+    build: ./ardrive-web
+    ports:
+      - 4001:80
