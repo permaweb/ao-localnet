@@ -1,19 +1,25 @@
 name: aonix-localnet
 
 configs:
+  ao-wallet:
+    file: ./ao-wallet.json
   ardrive-web-app-config:
-    file: ardrive-web/app-config.json
+    file: ./ardrive-web/app-config.json
+  mu-env:
+    file: ./mu/.env
 
 volumes:
   arlocal-db:
 
 services:
+
   arlocal:
     build: ./arlocal
     ports:
       - 4000:80
     volumes:
       - arlocal-db:/mnt
+
   ardrive-web:
     depends_on:
       - arlocal
@@ -23,3 +29,13 @@ services:
         target: /usr/local/apache2/htdocs/assets/assets/config/dev.json
     ports:
       - 4001:80
+
+  mu:
+    build: ./mu
+    configs:
+      - source: ao-wallet
+        target: /usr/app/ao-wallet.json
+      - source: mu-env
+        target: /usr/app/.env
+    ports:
+      - 4002:80
