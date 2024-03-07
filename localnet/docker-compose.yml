@@ -1,5 +1,9 @@
 name: aonix-localnet
 
+configs:
+  ardrive-web-app-config:
+    file: ardrive-web/app-config.json
+
 volumes:
   arlocal-db:
 
@@ -14,5 +18,8 @@ services:
     depends_on:
       - arlocal
     build: ./ardrive-web
+    configs:
+      - source: ardrive-web-app-config
+        target: /usr/local/apache2/htdocs/assets/assets/config/dev.json
     ports:
       - 4001:80
