@@ -1,3 +1,3 @@
-# aonix
+# ao-localnet
 
-An operating system for the [AO Computer](http://ao.computer/).
+Run a complete [AO Computer](http://ao.computer/) testbed, locally, with Docker Compose.

@@ -1,4 +1,4 @@
-name: aonix-localnet
+name: ao-localnet
 
 configs:
   ao-wallet:
