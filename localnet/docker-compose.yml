@@ -39,3 +39,25 @@ services:
         target: /usr/app/.env
     ports:
       - 4002:80
+
+  su:
+    depends_on:
+      su-database:
+        condition: service_healthy
+    build: ./su
+    configs:
+      - source: ao-wallet
+        target: /usr/app/ao-wallet.json
+    env_file: ./su/.env
+    ports:
+      - 4003:80
+
+  su-database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=su_user
+      - POSTGRES_PASSWORD=su_pass
+      - POSTGRES_DB=su_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U su_user"]
+      interval: 1s

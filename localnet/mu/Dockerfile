@@ -5,8 +5,6 @@ RUN apk add git
 
 WORKDIR /download
 RUN git clone --branch=${MU_VERSION} --depth=1 https://github.com/permaweb/ao.git
-WORKDIR /download/ao/servers/mu
-
 
 FROM node:alpine
 COPY --from=builder /download/ao/servers/mu /usr/app
