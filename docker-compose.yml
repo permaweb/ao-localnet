@@ -5,6 +5,8 @@ configs:
     file: ./ao-wallet.json
   ardrive-web-app-config:
     file: ./ardrive-web/app-config.json
+  cu-env:
+    file: ./cu/.env
   mu-env:
     file: ./mu/.env
 
@@ -61,3 +63,13 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U su_user"]
       interval: 1s
+
+  cu:
+    build: ./cu
+    configs:
+      - source: ao-wallet
+        target: /usr/app/ao-wallet.json
+      - source: cu-env
+        target: /usr/app/.env
+    ports:
+      - 4004:80

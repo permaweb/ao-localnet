@@ -1,10 +1,10 @@
 FROM node:alpine as downloader
-ARG MU_VERSION=main
+ARG SU_VERSION=main
 
 RUN apk add git
 
 WORKDIR /download
-RUN git clone --branch=${MU_VERSION} --depth=1 https://github.com/permaweb/ao.git
+RUN git clone --branch=${SU_VERSION} --depth=1 https://github.com/permaweb/ao.git
 
 FROM clux/muslrust:1.75.0 as builder
 COPY --from=downloader /download/ao/servers/su /usr/src
