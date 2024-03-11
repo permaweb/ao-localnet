@@ -14,6 +14,10 @@ volumes:
 services:
   arlocal:
     build: ./services/arlocal
+    healthcheck:
+      test: wget --spider http://localhost/info || exit 1
+      start_period: 10s
+      start_interval: 1s
     ports:
       - 4000:80
     volumes:
@@ -21,7 +25,8 @@ services:
 
   ardrive-web:
     depends_on:
-      - arlocal
+      arlocal:
+        condition: service_healthy
     build: ./services/ardrive-web
     configs:
       - source: ardrive-web-app-config
@@ -40,6 +45,8 @@ services:
 
   su:
     depends_on:
+      arlocal:
+        condition: service_healthy
       su-database:
         condition: service_healthy
     build: ./services/su
@@ -57,8 +64,9 @@ services:
       - POSTGRES_PASSWORD=su_pass
       - POSTGRES_DB=su_db
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U su_user -d su_db"]
-      interval: 1s
+      test: pg_isready -U su_user -d su_db || exit 1
+      start_period: 10s
+      start_interval: 1s
     volumes:
       - su:/var/lib/postgresql/data
 
@@ -88,7 +96,8 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
-      interval: 1s
+      test: pg_isready -U postgres -d postgres || exit 1
+      start_period: 10s
+      start_interval: 1s
     volumes:
       - turbo:/var/lib/postgresql/data
