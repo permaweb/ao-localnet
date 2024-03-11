@@ -5,10 +5,8 @@ configs:
     file: ./ao-wallet.json
   ardrive-web-app-config:
     file: ./ardrive-web/app-config.json
-  cu-env:
-    file: ./cu/.env
-  mu-env:
-    file: ./mu/.env
+  turbo-start-mjs:
+    file: ./turbo/start.mjs
 
 volumes:
   arlocal-db:
@@ -37,8 +35,7 @@ services:
     configs:
       - source: ao-wallet
         target: /usr/app/ao-wallet.json
-      - source: mu-env
-        target: /usr/app/.env
+    env_file: ./mu/.env
     ports:
       - 4002:80
 
@@ -61,7 +58,7 @@ services:
       - POSTGRES_PASSWORD=su_pass
       - POSTGRES_DB=su_db
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U su_user"]
+      test: ["CMD-SHELL", "pg_isready -U su_user -d su_db"]
       interval: 1s
 
   cu:
@@ -69,7 +66,28 @@ services:
     configs:
       - source: ao-wallet
         target: /usr/app/ao-wallet.json
-      - source: cu-env
-        target: /usr/app/.env
+    env_file: ./cu/.env
     ports:
       - 4004:80
+
+  turbo:
+    depends_on:
+      turbo-database:
+        condition: service_healthy
+    build: ./turbo
+    configs:
+      - source: ao-wallet
+        target: /usr/src/ao-wallet.json
+      - source: turbo-start-mjs
+        target: /usr/src/start.mjs
+    env_file: ./turbo/.env
+    ports:
+      - 4005:80
+
+  turbo-database:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 1s
