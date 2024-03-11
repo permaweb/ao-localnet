@@ -2,7 +2,7 @@ name: ao-localnet
 
 configs:
   ao-wallet:
-    file: ./ao-wallet.json
+    file: ./wallets/ao-wallet.json
   ardrive-web-app-config:
     file: ./services/ardrive-web/app-config.json
 
