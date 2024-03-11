@@ -4,14 +4,14 @@ configs:
   ao-wallet:
     file: ./ao-wallet.json
   ardrive-web-app-config:
-    file: ./ardrive-web/app-config.json
+    file: ./services/ardrive-web/app-config.json
 
 volumes:
   arlocal-db:
 
 services:
   arlocal:
-    build: ./arlocal
+    build: ./services/arlocal
     ports:
       - 4000:80
     volumes:
@@ -20,7 +20,7 @@ services:
   ardrive-web:
     depends_on:
       - arlocal
-    build: ./ardrive-web
+    build: ./services/ardrive-web
     configs:
       - source: ardrive-web-app-config
         target: /usr/local/apache2/htdocs/assets/assets/config/dev.json
@@ -28,11 +28,11 @@ services:
       - 4001:80
 
   mu:
-    build: ./mu
+    build: ./services/mu
     configs:
       - source: ao-wallet
         target: /usr/app/ao-wallet.json
-    env_file: ./mu/.env
+    env_file: ./services/mu/.env
     ports:
       - 4002:80
 
@@ -40,11 +40,11 @@ services:
     depends_on:
       su-database:
         condition: service_healthy
-    build: ./su
+    build: ./services/su
     configs:
       - source: ao-wallet
         target: /usr/app/ao-wallet.json
-    env_file: ./su/.env
+    env_file: ./services/su/.env
     ports:
       - 4003:80
 
@@ -59,11 +59,11 @@ services:
       interval: 1s
 
   cu:
-    build: ./cu
+    build: ./services/cu
     configs:
       - source: ao-wallet
         target: /usr/app/ao-wallet.json
-    env_file: ./cu/.env
+    env_file: ./services/cu/.env
     ports:
       - 4004:80
 
@@ -71,11 +71,11 @@ services:
     depends_on:
       turbo-database:
         condition: service_healthy
-    build: ./turbo
+    build: ./services/turbo
     configs:
       - source: ao-wallet
         target: /usr/src/ao-wallet.json
-    env_file: ./turbo/.env
+    env_file: ./services/turbo/.env
     ports:
       - 4005:80
 
