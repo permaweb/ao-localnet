@@ -7,7 +7,9 @@ configs:
     file: ./services/ardrive-web/app-config.json
 
 volumes:
-  arlocal-db:
+  arlocal:
+  su:
+  turbo:
 
 services:
   arlocal:
@@ -15,7 +17,7 @@ services:
     ports:
       - 4000:80
     volumes:
-      - arlocal-db:/mnt
+      - arlocal:/mnt
 
   ardrive-web:
     depends_on:
@@ -57,6 +59,8 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U su_user -d su_db"]
       interval: 1s
+    volumes:
+      - su:/var/lib/postgresql/data
 
   cu:
     build: ./services/cu
@@ -86,3 +90,5 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
       interval: 1s
+    volumes:
+      - turbo:/var/lib/postgresql/data
