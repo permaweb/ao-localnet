@@ -15,5 +15,7 @@ RUN sed -i 's/..\/..\/src\/arch/..\/arch/' src/migrations/20231106203141_nullabl
 RUN yarn
 RUN yarn build
 
+COPY start.mjs .
+
 EXPOSE 80
 CMD ["node", "start.mjs"]

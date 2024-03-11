@@ -5,14 +5,11 @@ configs:
     file: ./ao-wallet.json
   ardrive-web-app-config:
     file: ./ardrive-web/app-config.json
-  turbo-start-mjs:
-    file: ./turbo/start.mjs
 
 volumes:
   arlocal-db:
 
 services:
-
   arlocal:
     build: ./arlocal
     ports:
@@ -78,8 +75,6 @@ services:
     configs:
       - source: ao-wallet
         target: /usr/src/ao-wallet.json
-      - source: turbo-start-mjs
-        target: /usr/src/start.mjs
     env_file: ./turbo/.env
     ports:
       - 4005:80
