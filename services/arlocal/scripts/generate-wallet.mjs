@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { writeFile } from 'node:fs/promises'
 
 import { instance as arweave } from './utils/arweaveInstance.mjs'
