@@ -13,7 +13,8 @@ volumes:
 
 services:
   arlocal:
-    build: ./services/arlocal
+    image: textury/arlocal
+    command: node bin/index.js --persist --dbpath /mnt 80
     healthcheck:
       test: wget --spider http://localhost/info || exit 1
       start_period: 10s
