@@ -2,9 +2,7 @@
 
 import { arlocalUrl } from './utils/arweaveInstance.mjs'
 
-const qty = process.argv[2] || '1'
-
-const url = `${arlocalUrl}/mine/${qty}`
+const url = `${arlocalUrl}/reset`
 
 console.log(`GET ${url}`)
 
@@ -14,5 +12,5 @@ const res = await fetch(url, {
 
 console.log(`${res.status} ${res.statusText}`)
 
-const { height } = await res.json()
-console.log(`new height: ${height}`)
+const result = await res.text()
+console.log(result)

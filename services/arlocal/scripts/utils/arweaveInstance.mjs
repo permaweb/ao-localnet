@@ -10,5 +10,4 @@ export const instance = new Arweave({
   protocol: 'http',
   host: 'localhost',
   port: 4000,
-  logging: true,
 })

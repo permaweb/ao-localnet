@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { arlocalUrl } from './utils/arweaveInstance.mjs'
 import { getWalletAddress } from './utils/getWalletAddress.mjs'
 
