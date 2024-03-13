@@ -5,6 +5,8 @@ configs:
     file: ./wallets/ao-wallet.json
   ardrive-web-app-config:
     file: ./services/ardrive-web/app-config.json
+  turbo-wallet:
+    file: ./wallets/turbo-wallet.json
 
 volumes:
   arlocal:
@@ -94,8 +96,8 @@ services:
         condition: service_healthy
     build: ./services/turbo
     configs:
-      - source: ao-wallet
-        target: /usr/src/ao-wallet.json
+      - source: turbo-wallet
+        target: /usr/src/turbo-wallet.json
     env_file: ./services/turbo/.env
     ports:
       - 4005:80

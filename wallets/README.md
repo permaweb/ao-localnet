@@ -15,6 +15,7 @@ This will generate one wallet for each of the entries in the following table.
 | ao | `ao-wallet.json` | Used by the `cu`, `mu`, and `su` node running in the localnet. |
 | aos | `aos-wallet.json` | The owner of the `ao` processes launched within the localnet. |
 | scheduler-location-publisher | `scheduler-location-publisher-wallet.json` | This wallet will make an Arweave transaction with the `Scheduler-Location` tag set to the `su` URL. |
+| turbo | `turbo-wallet.json` | Used by the Turbo upload service. |
 
 ## Advanced Use Cases
 
@@ -38,5 +39,5 @@ You can symlink any of the expected wallet files to share a wallet between compo
 $ ./generateWallet.sh > master-wallet.json
 $ ln -s master-wallet.json ao-wallet.json
 $ ln -s master-wallet.json aos-wallet.json
-$ ln -s master-wallet.json turbo-wallet.json
+$ ln -s master-wallet.json user-wallet.json
 ```
