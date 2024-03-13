@@ -19,4 +19,4 @@ console.log(`${res.status} ${res.statusText}`)
 
 const balance = await res.text()
 
-console.log(`new balance: ${balance}`)
+console.log(`new balance: ${balance} winston`)
