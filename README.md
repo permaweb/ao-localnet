@@ -7,7 +7,7 @@ Run a complete [AO Computer](http://ao.computer/) testbed, locally, with Docker 
 _NB: later steps are not fully functional_
 
 1. Clone this repo and `cd` into the root. 
-1. Setup the ArWeave wallets that the `ao` components will use to talk to each other:
+1. Setup the Arweave wallets that the `ao` components will use to talk to each other:
     1. Execute `wallets/generateAll.sh` to create new wallets for everything.
     1. See [wallets/README.md](wallets/README.md) for more advanced configuration.
 1. Use Docker Compose to boot up the `ao` localnet containers:
@@ -15,14 +15,14 @@ _NB: later steps are not fully functional_
     1. Run `docker compose up --detach`
         1. _(This could take a while the first time you run it.)_
 1. You will have many services now bound to ports in the 4000 range (all subject to change):
-    1. http://localhost:4000/ - ArLocal (ArWeave gateway)
+    1. http://localhost:4000/ - ArLocal (Arweave gateway)
     1. http://localhost:4001/ - ArDrive Web
     1. http://localhost:4002/ - An `ao` `mu`
     1. http://localhost:4003/ - An `ao` `su`
     1. http://localhost:4004/ - An `ao` `cu`
-    1. http://localhost:4005/ - Turbo (ArWeave uploader/bundlr)
-    1. http://localhost:4006/ - ScAR (ArWeave block explorer)
-1. Next, you will likely want to seed data into ArWeave. Some options here:
+    1. http://localhost:4005/ - Turbo (Arweave uploader/bundlr)
+    1. http://localhost:4006/ - ScAR (Arweave block explorer)
+1. Next, you will likely want to seed data into Arweave. Some options here:
     1. `cd` into the `services/arlocal/scripts` helper scripts directory.
     1. Run `npm install` to install dependencies.
     1. Run `./generate-wallet.mjs` to generate a user wallet in the currently directory.
@@ -40,7 +40,7 @@ _NB: later steps are not fully functional_
 Approximately 80-90% operational, as the `ao` components are running, but not playing nicely with
 each other yet.
 
-- ✅ ArLocal instance mocking ArWeave and acting as ArWeave gateway
+- ✅ ArLocal instance mocking Arweave and acting as Arweave gateway
   - ℹ️ There are some features missing from [the upstream](https://github.com/textury/arlocal)
     that tend to be used by block explorers, so we are using
     [this fork](https://github.com/MichaelBuhler/arlocal), which fixes:
@@ -48,13 +48,18 @@ each other yet.
     - ⬜ Blocks don't include `block_size` ([#1](https://github.com/MichaelBuhler/arlocal/issues/1))
     - ⬜ Blocks don't include `reward_addr` ([#3](https://github.com/MichaelBuhler/arlocal/issues/3))
     - ⬜ Blocks don't include `weave_size` ([#2](https://github.com/MichaelBuhler/arlocal/issues/2))
-- ✅ ArWeave block explorer (web interface)
+- ✅ Arweave block explorer (web interface)
   - ✅ ScAR - A lightweight option from [here](https://github.com/renzholy/scar),
     forked [here](https://github.com/MichaelBuhler/scar) with improvements.
   - ⬜ ArweaveWebWallet - Another option from [here](https://github.com/jfbeats/ArweaveWebWallet)
     which powers https://arweave.app/.
 - ⚠️ Fully functional ArDrive Web (web interface)
-  - ℹ️ It appears the only thing blocking this is supporting gateway edge node subdomains.
+  - ℹ️ Two minor issues remaining:
+    - ⏳ Waiting on [this issue](https://github.com/ardriveapp/arweave-dart/issues/59), which causes ArDrive
+      Web to makes calls the Arweave gateway on the wrong port.
+    - ⚠️ ArDrive Web is using so-called "sandboxed urls" where it contacts the gateway on a subdomain that is
+      the base32 encoded transaction id of the Arweave transaction.
+      - _This can be suppress by adding `127.0.0.1 *.localhost` to your `/etc/hosts` file._
 - ⚠️ Fully functional `ao` computer
   - `cu`
     - ✅ Builds and boots.
