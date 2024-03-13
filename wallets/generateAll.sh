@@ -6,3 +6,4 @@ cd $(dirname $0)
 ./generateWallet.sh aos
 ./generateWallet.sh scheduler-location-publisher
 ./generateWallet.sh turbo
+./generateWallet.sh user

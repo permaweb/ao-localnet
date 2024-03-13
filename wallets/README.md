@@ -3,19 +3,21 @@
 Arweave wallets are needed to run many of the components in this repo.
 The wallets are expected to be present in this folder.
 
-## Simple se Case
+## Simple Use Case
 
 Just run `./generateAll.sh` in this folder.
-This will generate one wallet for each of the entries in the following table.
 
-## Wallet Summary
+This will generate one wallet for each of the entries in the following table:
+
+## Wallets
 
 | Name | Filename | Description |
 | --- | --- | --- |
 | ao | `ao-wallet.json` | Used by the `cu`, `mu`, and `su` node running in the localnet. |
-| aos | `aos-wallet.json` | The owner of the `ao` processes launched within the localnet. |
+| aos | `aos-wallet.json` | Passed into `aos`. Used as the owner of the `ao` processes launched within the localnet. |
 | scheduler-location-publisher | `scheduler-location-publisher-wallet.json` | This wallet will make an Arweave transaction with the `Scheduler-Location` tag set to the `su` URL. |
 | turbo | `turbo-wallet.json` | Used by the Turbo upload service. |
+| user | `user-wallet.json` | Used by the seed scripts for seeding data into Arlocal |
 
 ## Advanced Use Cases
 
