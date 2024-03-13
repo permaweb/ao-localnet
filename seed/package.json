@@ -1,6 +1,0 @@
-{
-	"dependencies": {
-		"ardrive-core-js": "^2.0.2",
-		"arweave": "^1.14.4"
-	}
-}

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { arlocalUrl } from './utils/arweaveInstance.mjs'
+import { arlocalUrl } from './utils/arweave.mjs'
 
 const qty = process.argv[2] || '1'
 
