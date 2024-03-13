@@ -45,13 +45,13 @@ each other yet.
     that tend to be used by block explorers, so we are using
     [this fork](https://github.com/MichaelBuhler/arlocal), which fixes:
     - ✅ Getting pending transactions via `GET /tx/pending` route
-    - [ ] Blocks don't include `block_size` ([#1](https://github.com/MichaelBuhler/arlocal/issues/1))
-    - [ ] Blocks don't include `reward_addr` ([#3](https://github.com/MichaelBuhler/arlocal/issues/3))
-    - [ ] Blocks don't include `weave_size` ([#2](https://github.com/MichaelBuhler/arlocal/issues/2))
-- ⚠️ ArWeave block explorer (web interface)
+    - ⬜ Blocks don't include `block_size` ([#1](https://github.com/MichaelBuhler/arlocal/issues/1))
+    - ⬜ Blocks don't include `reward_addr` ([#3](https://github.com/MichaelBuhler/arlocal/issues/3))
+    - ⬜ Blocks don't include `weave_size` ([#2](https://github.com/MichaelBuhler/arlocal/issues/2))
+- ✅ ArWeave block explorer (web interface)
   - ✅ ScAR - A lightweight option from [here](https://github.com/renzholy/scar),
     forked [here](https://github.com/MichaelBuhler/scar) with improvements.
-  - [ ] ArweaveWebWallet - Another option from [here](https://github.com/jfbeats/ArweaveWebWallet)
+  - ⬜ ArweaveWebWallet - Another option from [here](https://github.com/jfbeats/ArweaveWebWallet)
     which powers https://arweave.app/.
 - ⚠️ Fully functional ArDrive Web (web interface)
   - ℹ️ It appears the only thing blocking this is supporting gateway edge node subdomains.
@@ -60,13 +60,13 @@ each other yet.
     - ✅ Builds and boots.
   - `mu`
     - ✅ Builds and boots.
-    - ❌ Returns a 500 error when launching `aos` process.
-      - _Error: ao-mu:POST_root Failed to send the DataItem TypeError: f is not a function_
+    - ❌ Returns a 500 error when launching `aos` process. _Error: ao-mu:POST_root Failed to send the
+      DataItem TypeError: f is not a function_
   - `su`
     - ✅ Builds and boots.
 - ⚠️ Successfully launching `aos` processes on the `ao` localnet
   - ℹ️ Some of this code is not committed yet, but I currently have an error in the `mu` when
     launching `aos` -@MichaelBuhler
-- [ ] nginx reverse proxy, for hostname routing
-- [ ] DNS routing
-  -  A containers should be reachable via `*.ao-localnet.xyz` domain names.
+- ⬜ nginx reverse proxy, for hostname routing
+- ⬜ DNS routing
+  - ℹ️ A containers should be reachable via `*.ao-localnet.xyz` domain names.
