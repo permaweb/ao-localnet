@@ -102,3 +102,16 @@ services:
       start_interval: 1s
     volumes:
       - turbo:/var/lib/postgresql/data
+
+  scar:
+    depends_on:
+      arlocal:
+        condition: service_healthy
+    build:
+      context: ./services/scar
+      args:
+        - REPO=https://github.com/MichaelBuhler/scar.git
+        - BRANCH=main
+        - ARWEAVE_GATEWAY_URL=http://localhost:4000
+    ports:
+      - 4006:80

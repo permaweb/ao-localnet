@@ -20,6 +20,7 @@ _NB: later steps are not fully functional_
     1. http://localhost:4003/ - An `ao` `su`
     1. http://localhost:4004/ - An `ao` `cu`
     1. http://localhost:4005/ - Turbo (ArWeave uploader/bundlr)
+    1. http://localhost:4006/ - ScAR (ArWeave block explorer)
 1. Next, you will likely want to seed data into ArWeave. Some options here:
     1. `cd` into the `services/arlocal/scripts` helper scripts directory.
     1. Run `npm install` to install dependencies.
