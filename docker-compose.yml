@@ -21,9 +21,9 @@ services:
         - REPO=https://github.com/MichaelBuhler/arlocal.git
         - BRANCH=main
     command: [
-      "--persist",           # save the database to disk
-      "--dbpath", "/app/db", # in this folder
-      "80",                  # listen on port 80
+      "--persist",      # save the database to disk
+      "--dbpath", "db", # in this folder
+      "80",             # listen on port 80
     ]
     healthcheck:
       test: wget --spider http://localhost/info || exit 1
