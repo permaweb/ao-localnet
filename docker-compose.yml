@@ -13,8 +13,16 @@ volumes:
 
 services:
   arlocal:
-    image: textury/arlocal
-    command: node bin/index.js --persist --dbpath /mnt 80
+    build:
+      context: ./services/arlocal
+      args:
+        - REPO=https://github.com/MichaelBuhler/arlocal.git
+        - BRANCH=main
+    command: [
+      "--persist",           # save the database to disk
+      "--dbpath", "/app/db", # in this folder
+      "80",                  # listen on port 80
+    ]
     healthcheck:
       test: wget --spider http://localhost/info || exit 1
       start_period: 10s
@@ -22,7 +30,7 @@ services:
     ports:
       - 4000:80
     volumes:
-      - arlocal:/mnt
+      - arlocal:/app/db
 
   ardrive-web:
     depends_on:

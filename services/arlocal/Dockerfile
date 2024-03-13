@@ -17,12 +17,17 @@ FROM node:alpine as builder
 WORKDIR /build
 COPY --from=downloader /download .
 
+RUN apk add git
+
+# `install` runs `prepare` which runs `build`
 RUN yarn install
-ARG ARWEAVE_GATEWAY_URL
-RUN VITE_ARWEAVE_GATEWAY_URL="${ARWEAVE_GATEWAY_URL}" yarn build
 
 ################################################################################
 # Run
 
-FROM httpd:alpine
-COPY --from=builder /build/dist /usr/local/apache2/htdocs
+FROM node:alpine
+WORKDIR /app
+COPY --from=builder /build/bin bin
+COPY --from=builder /build/node_modules node_modules
+
+ENTRYPOINT ["node", "bin/index.js"]
