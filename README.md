@@ -73,7 +73,7 @@ each other yet.
       Web to makes calls the Arweave gateway on the wrong port.
     - ⚠️ ArDrive Web is using so-called "sandboxed urls" where it contacts the gateway on a subdomain that is
       the base32 encoded transaction id of the Arweave transaction.
-      - _This can be suppress by adding `127.0.0.1 *.localhost` to your `/etc/hosts` file._
+      - _This can be mitigated by adding `127.0.0.1 *.localhost` to your `/etc/hosts` file._
 - ⚠️ Fully functional `ao` computer, using the
   [reference implementations](https://github.com/permaweb/ao/servers).
   - `cu`
