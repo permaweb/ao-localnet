@@ -63,7 +63,7 @@ services:
     build: ./services/su
     configs:
       - source: ao-wallet
-        target: /usr/app/ao-wallet.json
+        target: /app/ao-wallet.json
     env_file: ./services/su/.env
     ports:
       - 4003:80

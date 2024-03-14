@@ -6,15 +6,17 @@ RUN apk add git
 WORKDIR /download
 RUN git clone --branch=${SU_VERSION} --depth=1 https://github.com/permaweb/ao.git
 
-FROM clux/muslrust:1.75.0 as builder
-COPY --from=downloader /download/ao/servers/su /usr/src
-WORKDIR /usr/src
+FROM rust AS builder
+WORKDIR /build
+COPY --from=downloader /download/ao/servers/su .
 
-RUN cargo build --release --target x86_64-unknown-linux-musl
+RUN cargo build --release
 
-FROM alpine:latest
-COPY --from=builder /usr/src/target/x86_64-unknown-linux-musl/release/su /usr/app/su
-WORKDIR /usr/app
+FROM rust:slim
+WORKDIR /app
+COPY --from=builder /build/target/release/su .
+
+RUN apt update && apt install --yes libpq5
 
 EXPOSE 80
 CMD ["./su", "su", "80"]
