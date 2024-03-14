@@ -1,4 +1,4 @@
-import { instance as arweave } from './arweaveInstance.mjs'
+import { instance as arweave } from './arweave.mjs'
 import { loadWallet } from './loadWallet.mjs'
 
 export async function getWalletAddress () {

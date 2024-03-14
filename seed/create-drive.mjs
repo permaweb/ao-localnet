@@ -1,24 +1,17 @@
 #!/usr/bin/env node
 
 import { writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
 
-import { arDriveFactory, JWKWallet } from 'ardrive-core-js'
-
-import { instance as arweave } from './utils/arweaveInstance.mjs'
-import { loadWallet } from './utils/loadWallet.mjs'
-
-const arDrive = arDriveFactory({
-  arweave,
-  wallet: new JWKWallet(await loadWallet()),
-})
+import { arDrive } from './utils/ardrive.mjs'
 
 const { created } = await arDrive.createPublicDrive({
-  driveName: 'Test Drive'
+  driveName: 'Test Drive',
 })
 
 const driveJson = JSON.stringify(created, null, 2)
 
-await writeFile('drive.json', driveJson)
+await writeFile(join('extras', 'drive.json'), driveJson)
 
 const txId = created.find(x => x.type === 'bundle').bundleTxId
 console.log(`txId:         ${txId}`)
