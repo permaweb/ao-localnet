@@ -8,7 +8,7 @@ if [ "" = "$1" ]; then
 fi
 
 case "$1" in
-  ao | aos | scheduler-location-publisher | turbo | user)
+  ao | aos | aos-module-publisher | bundler | scheduler-location-publisher | turbo | user)
     WALLET_FILE="$1-wallet.json"
     ;;
   *)
