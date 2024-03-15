@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "arbundles": "^0.11.0",
+    "arweave": "^1.14.4",
+    "debug": "^4.3.4",
+    "express": "^5.0.0-beta.1"
+  }
+}
