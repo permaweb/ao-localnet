@@ -10,10 +10,8 @@ FROM node:alpine as builder
 COPY --from=downloader /download/turbo-upload-service /usr/src
 WORKDIR /usr/src
 
-# can remove this line after https://github.com/ardriveapp/turbo-upload-service/pull/5 is merged.
-RUN sed -i 's/..\/..\/src\/arch/..\/arch/' src/migrations/20231106203141_nullable_content_type.ts
-
 RUN yarn
+
 RUN yarn build
 
 COPY start.mjs .

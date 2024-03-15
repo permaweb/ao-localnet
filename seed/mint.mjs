@@ -3,7 +3,7 @@
 import { arlocalUrl } from './utils/arweave.mjs'
 import { getWalletAddress } from './utils/getWalletAddress.mjs'
 
-const amount = process.argv[2] || '1000000000'
+const amount = process.argv[2] || (1_000_000_000_000).toString()
 
 const address = await getWalletAddress()
 
