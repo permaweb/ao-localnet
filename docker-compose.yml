@@ -11,7 +11,6 @@ configs:
     file: ./wallets/turbo-wallet.json
 
 volumes:
-  arlocal:
   su:
   turbo:
 
@@ -34,7 +33,7 @@ services:
     ports:
       - 4000:80
     volumes:
-      - arlocal:/app/db
+      - ./services/arlocal/data:/app/db
 
   ardrive-web:
     depends_on:
