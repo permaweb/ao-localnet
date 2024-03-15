@@ -36,6 +36,7 @@ services:
       - ./services/arlocal/data:/app/db
 
   ardrive-web:
+    profiles: ["ardrive"]
     depends_on:
       arlocal:
         condition: service_healthy
@@ -92,6 +93,7 @@ services:
       - 4004:80
 
   turbo:
+    profiles: ["turbo"]
     depends_on:
       turbo-database:
         condition: service_healthy
@@ -104,6 +106,7 @@ services:
       - 4005:80
 
   turbo-database:
+    profiles: ["turbo"]
     image: postgres
     environment:
       - POSTGRES_PASSWORD=postgres
@@ -115,6 +118,7 @@ services:
       - turbo:/var/lib/postgresql/data
 
   scar:
+    profiles: ["explorer", "scar"]
     depends_on:
       arlocal:
         condition: service_healthy
