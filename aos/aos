@@ -1,0 +1,66 @@
+#!/bin/sh
+
+AOS_BIN=node_modules/.bin/aos
+AOS_WALLET_FILE=../wallets/aos-wallet.json
+SCHEDULER_LOCATION_PUBLISHER_WALLET_FILE=../wallets/scheduler-location-publisher-wallet.json
+
+cd $(dirname $0)
+
+for wallet in $AOS_WALLET_FILE $SCHEDULER_LOCATION_PUBLISHER_WALLET_FILE; do
+  if [ ! -f "$wallet" ]; then
+    echo "wallet does not exist: $(pwd)/$wallet"
+    exit 1
+  fi
+done
+
+if [ ! -f "$AOS_BIN" ]; then
+  npm install
+fi
+
+# TODO: need to find this module id programatically with a query to Arlocal
+AOS_MODULE=eWg6Vd4eSFaPbvxqP_M3sYDncam0-Aq6dsAcsf4U3yY 
+echo "!!!"
+echo "!!!"
+echo "!!!"
+echo "!!!                 $AOS_MODULE"
+echo "!!!"
+echo "!!! using aos module ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+echo "!!! please make sure"
+echo "!!! this is correct!"
+echo "!!!"
+echo "!!!"
+echo "!!!"
+ARWEAVE_GRAPHQL=http://localhost:4000/graphql
+CU_URL=http://localhost:4004
+GATEWAY_URL=http://localhost:4000
+MU_URL=http://localhost:4002
+# The SCHEDULER env var should be set to the wallet address that published the 'Scheduler-Location' tag
+SCHEDULER=$(
+node --input-type=module <<EOF
+  import { readFile } from 'node:fs/promises'
+  import Arweave from 'arweave'
+  const arweave = new Arweave({
+    protocol: 'http',
+    host: 'localhost',
+    port: 4000,
+  })
+  const walletJson = await readFile('$SCHEDULER_LOCATION_PUBLISHER_WALLET_FILE', 'utf8')
+  const wallet = JSON.parse(walletJson)
+  const address = await arweave.wallets.getAddress(wallet)
+  console.log(address)
+EOF
+)
+
+echo AOS_MODULE=$AOS_MODULE
+echo ARWEAVE_GRAPHQL=$ARWEAVE_GRAPHQL
+echo CU_URL=$CU_URL
+echo GATEWAY_URL=$GATEWAY_URL
+echo MU_URL=$MU_URL
+echo SCHEDULER=$SCHEDULER
+export AOS_MODULE
+export ARWEAVE_GRAPHQL
+export CU_URL
+export GATEWAY_URL
+export MU_URL
+export SCHEDULER
+$AOS_BIN --wallet "$AOS_WALLET_FILE"
