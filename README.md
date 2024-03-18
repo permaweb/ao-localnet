@@ -2,8 +2,8 @@
 > **This is an experimental repo that is intended for power users developing core aspects of the `ao`
 > computer, new `ao` unit implementations, or custom `ao` modules.**
 >
-> **As such, this repo may become out-of-date and may not work out-of-the-box, and novice developers
-> _will not_ be given much support.**
+> **As such, this repo may become out-of-date and may not work out-of-the-box, and no Tier 1 support from the  is offered
+> for this repository.**
 >
 > **If you want to run `aos` processes, please refer to its
 > [source code](https://github.com/permaweb/aos) or the
@@ -63,9 +63,10 @@ The repo may helpful if you are doing one or more of the following:
 - ArDrive Web:
   - Run `docker compose --profile ardrive up`.
   - http://localhost:4001/
+  - _Not fully functional. See below for more details._
 - Turbo Upload Service (an Arweave uploader/bundlr):
   - Run `docker compose --profile turbo up`.
-  - http://localhost:4005/ 
+  - http://localhost:4005/
   - _Not fully functional. See below for more details._
 
 ## Development Status of this Repo
@@ -103,11 +104,17 @@ The repo may helpful if you are doing one or more of the following:
   - ✅ Routing `*.ao-localnet.xyz` to `127.0.0.1` and `::1`
   - ℹ️ All containers should be reachable via `*.ao-localnet.xyz` domain names.
 - ⚠️ Fully functional ArDrive Web (web interface)
-  - ℹ️ Two minor issues remaining:
-    - ⏳ Waiting on [this issue](https://github.com/ardriveapp/arweave-dart/issues/59), which causes ArDrive
-      Web to makes calls the Arweave gateway on the wrong port.
-      - ✅ Scheduled for [the next release (v3.8.4)](https://github.com/ardriveapp/arweave-dart/pull/61).
+  - ⏳ Known issues:
+    - ℹ️ Arweave gateway port [bug](https://github.com/ardriveapp/arweave-dart/issues/59):
+      - ✅ Fixed in [arweave-dart@v3.8.4](https://github.com/ardriveapp/arweave-dart/releases/tag/v3.8.4).
+      - 💻 Hacked together by `grep | sed` replacing the dependency in `ardrive-web@v2.37.2`
+      - 🙏 Hopefully fixed in the next version of [ArDrive Web](https://github.com/ardriveapp/ardrive-web).
     - ⚠️ ArDrive Web is using so-called "sandboxed urls" where it contacts the gateway on a subdomain that is
       the base32 encoded transaction id of the Arweave transaction.
-      - _This can be mitigated by adding `127.0.0.1 *.localhost` to your `/etc/hosts` file._
-      - _Possibly can be fixed with DNS routing, see above._
+      - _This_ can _be resolved by adding `127.0.0.1 *.localhost` to your `/etc/hosts` file._
+      - _Probably will be fixed with DNS routing, see above._
+    - ⚠️ Cannot upload files due to missing Payment Service.
+      - _ArDrive Web doesn't respect its own configuration file setting: `"useTurboPayment": false`_
+      - _Probably because
+      [this class member](https://github.com/ardriveapp/ardrive-web/blob/v2.37.2/lib/turbo/services/payment_service.dart#L13)
+      is hard coded?_
