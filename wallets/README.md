@@ -37,7 +37,7 @@ $ ./generateWallet.sh my-wallet.json
 $ ./generateWallet.sh > my-other-wallet.json
 ```
 
-You can symlink any of the expected wallet files to share a wallet between components. For exmaple:
+You can symlink any of the expected wallet files to share a wallet between components. For example:
 
 ```bash
 $ ./generateWallet.sh > master-wallet.json

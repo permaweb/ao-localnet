@@ -1,8 +1,8 @@
 {
   "defaultArweaveGatewayUrl": "http://localhost:4000",
   "useTurboUpload": true,
-  "useTurboPayment": true,
   "defaultTurboUploadUrl": "https://localhost:4007",
+  "useTurboPayment": false,
   "defaultTurboPaymentUrl": "https://example.com",
   "allowedDataItemSizeForTurbo": 10000000,
   "enableQuickSyncAuthoring": true,
