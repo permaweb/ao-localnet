@@ -19,7 +19,8 @@ COPY --from=downloader /download .
 
 RUN yarn install
 ARG ARWEAVE_GATEWAY_URL
-RUN VITE_ARWEAVE_GATEWAY_URL="${ARWEAVE_GATEWAY_URL}" yarn build
+ENV VITE_ARWEAVE_GATEWAY_URL=${ARWEAVE_GATEWAY_URL}
+RUN yarn run build --mode development
 
 ################################################################################
 # Run
