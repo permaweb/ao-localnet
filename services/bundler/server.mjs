@@ -46,10 +46,10 @@ const handler = async (req, res) => {
     data: dataItem.rawData,
   })
   txLogger('adding tags...')
-  tx.addTag('Bundle-Format',  'binary'             )
-  tx.addTag('Bundle-Version', '2.0.0'              )
   tx.addTag('App-Name',       'ao-localnet bundler')
   tx.addTag('App-Version',    '0.0.1'              )
+  tx.addTag('Bundle-Format',  'binary'             )
+  tx.addTag('Bundle-Version', '2.0.0'              )
   txLogger('signing...')
   await arweave.transactions.sign(tx, wallet)
   txLogger('signed', tx)
