@@ -2,8 +2,8 @@
 > **This is an experimental repo that is intended for power users developing core aspects of the `ao`
 > computer, new `ao` unit implementations, or custom `ao` modules.**
 >
-> **As such, this repo may become out-of-date and may not work out-of-the-box, and no Tier 1 support from the  is offered
-> for this repository.**
+> **As such, this repo may become out-of-date and may not work out-of-the-box, and no Tier 1 support from
+> the AO dev team is offered for this repository.**
 >
 > **If you want to run `aos` processes, please refer to its
 > [source code](https://github.com/permaweb/aos) or the
