@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@permaweb/aos": "permaweb/aos#MichaelBuhler/improvement-environment-variables"
+    "@permaweb/aos": "permaweb/aos#main"
   }
 }
