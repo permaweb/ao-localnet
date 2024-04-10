@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@permaweb/aos": "permaweb/aos#main"
+    "@permaweb/aos": "https://get_ao.g8way.io"
   }
 }
